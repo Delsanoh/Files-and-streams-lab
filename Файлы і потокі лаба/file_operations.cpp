@@ -28,7 +28,6 @@ void checkFile(const std::string& filename) {
 bool readVectorsFromFile(const std::string& filename, SparseVector& v1, SparseVector& v2)
 {
     try {
-        // Проверяем файл
         checkFile(filename);
     }
     catch (const std::exception& e) {
@@ -39,12 +38,6 @@ bool readVectorsFromFile(const std::string& filename, SparseVector& v1, SparseVe
     std::ifstream file(filename);
     if (!file.is_open()) {
         throw std::runtime_error(std::format("Ошибка: невозможно открыть файл '{}'", filename));
-    }
-
-    // Дополнительная проверка на пустоту
-    if (file.peek() == std::ifstream::traits_type::eof()) {
-        file.close();
-        throw std::runtime_error(std::format("Ошибка: файл '{}' пуст", filename));
     }
 
     clearVector(v1);
